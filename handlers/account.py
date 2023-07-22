@@ -81,6 +81,8 @@ class AccountImagesHandler(BaseHandler):
 
         other_shakes = user.shakes(include_managed=False, include_only_group_shakes=True)
 
+        alt_text_streak = user_shake.alt_text_streak()
+
         if not images and page != 1:
             raise tornado.web.HTTPError(404)
         return self.render("account/index.html", images=images, user=user,
@@ -89,7 +91,7 @@ class AccountImagesHandler(BaseHandler):
             following_shakes=following_shakes[:10],
             following_shakes_count=following_shakes_count, followers=followers[:10],
             follower_count=follower_count, other_shakes=other_shakes,
-            has_data_to_migrate=has_data_to_migrate)
+            has_data_to_migrate=has_data_to_migrate, alt_text_atreak=alt_text_streak)
 
 
 class UserLikesHandler(BaseHandler):

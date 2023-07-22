@@ -363,6 +363,9 @@ class Shake(ModelQueryCache, Model):
         """
         return self.created_at and self.created_at.strftime("%a, %d %b %Y %H:%M:%S %Z")
 
+    def alt_text_streak(self):
+        return shakesharedfile.Shakesharedfile.where_count("shake_id=%s and alt_text IS NOT NULL and alt_text != ''", self.id)
+
     @classmethod
     def featured_shakes(self, limit=3):
         """
@@ -376,4 +379,3 @@ class Shake(ModelQueryCache, Model):
         Return a randomly sorted list of recommended shakes for a category.
         """
         return self.where("type = 'group' and shake_category_id = %s order by name", category.id)
-

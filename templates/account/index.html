@@ -23,6 +23,12 @@
         {{modules.UserCounts(user=user)}}
       {% end %}
 
+      {% if user.show_alt_text_streak %}
+        <div class="alt-text-streak">
+          Alt text streak: <span class="count">{{alt_text_streak}}</span>
+        </div>
+      {% end %}
+
       <div class="sidebar-search-block fun-form">
         <form method="GET" action="/search">
           <input type="hidden" name="context" value="{% if user.id == current_user_obj.id %}in:mine{% else %}from:{{escape(user.name)}}{% end %}" autocomplete="off">
